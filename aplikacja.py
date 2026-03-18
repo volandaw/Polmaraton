@@ -11,12 +11,7 @@ import json
 load_dotenv()
 # Wczytaj klucze
 load_dotenv()
-# Inicjalizacja Langfuse
-langfuse = Langfuse(
-    public_key=os.getenv('LANGFUSE_PUBLIC_KEY'),
-    secret_key=os.getenv('LANGFUSE_SECRET_KEY'),
-    host=os.getenv('LANGFUSE_HOST')
-)
+
 
 # Połącz z DO Spaces i pobierz model
 @st.cache_resource
@@ -55,7 +50,7 @@ def extract_data_with_llm(text):
         ]
     )
     result = json.loads(response.choices[0].message.content)
-    
+
     return result
 
 # Interfejs aplikacji
