@@ -7,9 +7,8 @@ import io
 from dotenv import load_dotenv
 from openai import OpenAI
 import json
-from langfuse import Langfuse
-from langfuse.decorators import observe, langfuse_context
-
+# Wczytaj klucze
+load_dotenv()
 # Wczytaj klucze
 load_dotenv()
 # Inicjalizacja Langfuse
@@ -37,7 +36,7 @@ def load_model_from_spaces():
 openai_client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # Wyłuskaj dane z tekstu przez LLM
-@observe()
+
 def extract_data_with_llm(text):
     response = openai_client.chat.completions.create(
         model="gpt-4o-mini",
@@ -56,10 +55,7 @@ def extract_data_with_llm(text):
         ]
     )
     result = json.loads(response.choices[0].message.content)
-    langfuse_context.update_current_observation(
-        input=text,
-        output=result
-    )
+    
     return result
 
 # Interfejs aplikacji
