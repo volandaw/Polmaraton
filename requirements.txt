@@ -4,6 +4,6 @@ pandas
 scikit-learn
 python-dotenv
 openai
-langfuse>=2.0.0
+langfuse==2.7.3
 joblib
 numpy
